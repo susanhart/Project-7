@@ -1,8 +1,12 @@
 import React from 'react';
+import {
+  BrowserRouter,
+  Route
+} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function Home() {
   return (
     <div className="App">
       <header className="App-header">
@@ -22,5 +26,17 @@ function App() {
     </div>
   );
 }
+function About() {
+  return (
+  <div> About </div> 
+)}
 
+const App = () => (
+  <BrowserRouter>
+  <div className="container">
+    <Route path="/" component={Home} />
+    <Route exact path="/about" component={About} />
+  </div>
+  </BrowserRouter>
+)
 export default App;
