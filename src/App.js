@@ -6,6 +6,12 @@ import {
 import logo from './logo.svg';
 import './App.css';
 
+// these are the components
+import Nav from './components/Nav';
+import Gallery from './components/Gallery';
+import PageNotFound from './components/PageNotFound';
+import SearchForm from './components/SearchForm';
+
 function Home() {
   return (
     <div className="App">

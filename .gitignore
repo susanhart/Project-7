@@ -1,3 +1,6 @@
 
 react-app/src/config.js
 .DS_Store
+
+# dependencies
+/node_modules
