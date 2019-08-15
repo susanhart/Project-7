@@ -4,11 +4,10 @@ import ImagesNotFound from './ImagesNotFound';
 
 const Gallery = props => {
 
-    const results = props.data;
     let images;
-    if (results.length > 0) {
-        images = results.map(images => 
-            <GalleryItem url={`https://farm${picture.car}.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`} key={picture.id}/>) 
+    if (props.images.length > 0) {
+        images = props.images.map(picture => 
+            <GalleryItem url={`https://live.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`} key={picture.id}/>) 
     } else {
         images = <ImagesNotFound/>
     }
