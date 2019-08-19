@@ -1,7 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 const Nav = () => (
-    <ul className="main-nav"> 
+    <nav className="main-nav"> 
+        <ul>
         <li> 
         <NavLink to="/mountains">Mountains</NavLink>
         </li> 
@@ -15,6 +16,7 @@ const Nav = () => (
         <NavLink to="/">Home</NavLink>
         </li> 
     </ul>
+    </nav>
 );
 
 export default Nav;
