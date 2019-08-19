@@ -3,12 +3,11 @@ import GalleryItem from './GalleryItem';
 import ImagesNotFound from './ImagesNotFound';
 
 const Gallery = props => {
-
     let images;
-    if (props.images.length > 0) {
-        images = props.images.map(picture => 
+    if (props.data.length > 0) {
+        images = props.data.map(picture => 
             <GalleryItem url={`https://live.staticflickr.com/${picture.server}/${picture.id}_${picture.secret}.jpg`} key={picture.id}/>) 
-    } else {
+    } else { 
         images = <ImagesNotFound/>
     }
     
