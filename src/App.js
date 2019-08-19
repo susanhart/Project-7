@@ -5,7 +5,6 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import './App.css';
 import axios from 'axios';
 
 // these are the components

@@ -14,7 +14,7 @@ export default class SearchForm extends Component {
 
  render(){
     return (
-        <form class='search-form' onSubmit={this.handleSubmit}>
+        <form className='search-form' onSubmit={this.handleSubmit}>
          <input type='search' onChange={this.onSearchChange} name='search' ref={(input) => this.userSearch = input} placeholder='search' />
            <button type='submit'>Search</button>
         </form>

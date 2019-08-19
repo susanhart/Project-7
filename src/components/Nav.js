@@ -1,20 +1,20 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 const Nav = () => (
-    <div> 
-        <div> 
+    <ul className="main-nav"> 
+        <li> 
         <NavLink to="/mountains">Mountains</NavLink>
-        </div> 
-        <div> 
+        </li> 
+        <li> 
         <NavLink to="/waterfalls">Waterfalls</NavLink>
-        </div>
-        <div>  
+        </li>
+        <li>  
         <NavLink to="/flowers">Flowers</NavLink>
-        </div> 
-        <div>  
+        </li> 
+        <li>  
         <NavLink to="/">Home</NavLink>
-        </div> 
-    </div>
+        </li> 
+    </ul>
 );
 
 export default Nav;
