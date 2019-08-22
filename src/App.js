@@ -33,6 +33,10 @@ export default class App extends Component {
   }
 
   performSearch = (query) => {
+
+    console.log("hello you searched for");
+    console.log(query);
+
     axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       
@@ -63,19 +67,15 @@ export default class App extends Component {
     });
   }
 
-  performSearch(search) {
-    console.log("hello you searched for");
-    console.log(search);
-  }
-
   render() {
     return (
       <BrowserRouter>
         <div className='container'>
-          <Route exact path="/" component={() => <SearchForm onSearch={this.performSearch} />}/>
+        <Route render={(props) => <SearchForm {...props} onSearch={this.performSearch} /> }  />
+          {/* <Route exact path="/" component={() => <SearchForm onSearch={this.performSearch} />}/>
           <Route exact path="/waterfalls" component={() => <SearchForm onSearch={this.waterfallsSearch} />}/>
           <Route exact path="/flowers" component={() => <SearchForm onSearch={this.flowersSearch} />}/>
-          <Route exact path="/mountains" component={() => <SearchForm onSearch={this.mountainsSearch} />}/>
+          <Route exact path="/mountains" component={() => <SearchForm onSearch={this.mountainsSearch} />}/> */}
           <Nav />
           <Switch>
             {
