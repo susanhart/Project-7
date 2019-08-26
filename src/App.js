@@ -13,58 +13,98 @@ import Gallery from './components/Gallery';
 import PageNotFound from './components/PageNotFound';
 import SearchForm from './components/SearchForm';
 
+class GalleryFetcher extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loading: [],
+      result: []
+    };
+  }
+  fetch = () => {
+    this.setState({
+      loading: true
+    })
+    const query =  this.props.query || this.props.path;
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    .then(response => {
+      this.setState({
+        result: response.data.photos.photo,
+        loading: false
+      });
+    });
+  }
+  componentDidMount() {
+    this.fetch();
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.path !== this.props.path || prevProps.query !== this.props.query) {
+      this.fetch();
+    }
+  
+  }
+  render() {
+    if (!this.state.loading) {
+      return <Gallery data={this.state.result} />
+    } else {
+      return null;
+    }
+  }
+}
 export default class App extends Component {
   
   constructor() {
     super();
     this.state = {
-      pictures: [],
-      waterfalls: [], 
-      flowers: [],
-      mountains: []
+      query: null,
     };
 }
 
   componentDidMount() {
-    this.performSearch("sunsets");
-    this.performSearch("waterfalls");
-    this.performSearch("flowers");
-    this.performSearch("mountains");
+    // this.performSearch("sunsets");
+    // this.performSearch("waterfalls");
+    // this.performSearch("flowers");
+    // this.performSearch("mountains");
   }
 
   performSearch = (query) => {
-
-    console.log("hello you searched for");
-    console.log(query);
-
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-    .then(response => {
-      
-      if (query === "waterfalls") {
-        this.setState({
-          waterfalls: response.data.photos.photo,
-          loading: false
-        });
-      } else if (query === "flowers") {
-        this.setState({
-          flowers: response.data.photos.photo,
-          loading: false
-        });
-      } else if (query === "mountains") {
-        this.setState({
-          mountains: response.data.photos.photo,
-          loading: false
-        });
-      } else { 
-        this.setState({
-        pictures: response.data.photos.photo,
-        loading: false
-      });
-    }
+    this.setState({
+      query: query
     })
-    .catch(error => {
-      console.log('Error fetching parsing data', error);
-    });
+    // console.log("hello you searched for");
+    // console.log(query);
+
+    // axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    // .then(response => {
+    //   this.setState({
+    //     result: response.data.photos.photo,
+    //     loading: false
+    //   });
+    //   if (query === "waterfalls") {
+    //     this.setState({
+    //       waterfalls: response.data.photos.photo,
+    //       loading: false
+    //     });
+    //   } else if (query === "flowers") {
+    //     this.setState({
+    //       flowers: response.data.photos.photo,
+    //       loading: false
+    //     });
+    //   } else if (query === "mountains") {
+    //     this.setState({
+    //       mountains: response.data.photos.photo,
+    //       loading: false
+    //     });
+    //   } else { 
+    //     this.setState({
+    //     pictures: response.data.photos.photo,
+    //     loading: false
+    //   });
+    // }
+    // })
+    // .catch(error => {
+    //   console.log('Error fetching parsing data', error);
+    // });
   }
 
   render() {
@@ -78,15 +118,11 @@ export default class App extends Component {
           <Route exact path="/mountains" component={() => <SearchForm onSearch={this.mountainsSearch} />}/> */}
           <Nav />
           <Switch>
-            {
-              (this.state.loading)
-              ? <h3 className='active'>Loading...</h3>
-              : <Route exact path='/' render={() => <Gallery data={this.state.pictures} />} />
-            }
-            <Route path='/waterfalls' render={() => <Gallery data={this.state.waterfalls} />} />
-            <Route path='/flowers' render={() => <Gallery data={this.state.flowers} />} />
-            <Route path='/mountains' render={() => <Gallery data={this.state.mountains} />} />
-            <Route path='/search' render={() => <Gallery data={this.state.pictures} />} />
+            <Route exact path='/' render={() => <GalleryFetcher path="sunsets" query={this.state.query} />} />
+            <Route path='/waterfalls' render={() => <GalleryFetcher path="waterfalls" query={this.state.query} />} />
+            <Route path='/flowers' render={() => <GalleryFetcher path="flowers" query={this.state.query} />} />
+            <Route path='/mountains' render={() => <GalleryFetcher path="mountains" query={this.state.query} />} />
+            <Route path='/search' render={() => <GalleryFetcher path="sunsets" query={this.state.query} />} />
             <Route component={PageNotFound} />
           </Switch>
         </div>
