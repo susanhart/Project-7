@@ -67,12 +67,16 @@ export default class App extends Component {
     // this.performSearch("mountains");
   }
 
+  clearQuery = () => {
+    this.setState({query: null});
+  }
+
   performSearch = (query) => {
     this.setState({
       query: query
     })
     // console.log("hello you searched for");
-    // console.log(query);
+    console.log(query);
 
     // axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     // .then(response => {
@@ -111,7 +115,7 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <div className='container'>
-        <Route render={(props) => <SearchForm {...props} onSearch={this.performSearch} /> }  />
+        <Route render={(props) => <SearchForm {...props} onSearch={this.performSearch} clearQuery={this.clearQuery} /> }  />
           {/* <Route exact path="/" component={() => <SearchForm onSearch={this.performSearch} />}/>
           <Route exact path="/waterfalls" component={() => <SearchForm onSearch={this.waterfallsSearch} />}/>
           <Route exact path="/flowers" component={() => <SearchForm onSearch={this.flowersSearch} />}/>

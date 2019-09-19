@@ -4,8 +4,11 @@ export default class SearchForm extends Component {
  state = {
      searchText: ''
  }   
- onsearchChange = e => {
+ onSearchChange = e => {
     this.setState({searchText: e.target.value});
+    if (e.target.value === ""){
+       this.props.clearQuery();
+    }
  }
  handleSubmit = e => {
     e.preventDefault();
