@@ -34,10 +34,10 @@ class GalleryFetcher extends Component {
       });
     });
   }
-  componentDidMount() {
+  componentDidMount() { //this runs only once initially
     this.fetch();
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {  //this runs everytime you update the component
     if (prevProps.path !== this.props.path || prevProps.query !== this.props.query) {
       this.fetch();
     }
