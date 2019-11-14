@@ -61,12 +61,7 @@ export default class App extends Component {
 }
 
   componentDidMount() {
-    // this.performSearch("sunsets");
-    // this.performSearch("waterfalls");
-    // this.performSearch("flowers");
-    // this.performSearch("mountains");
   }
-
   clearQuery = () => {
     this.setState({query: null});
   }
@@ -78,37 +73,7 @@ export default class App extends Component {
     // console.log("hello you searched for");
     console.log(query);
 
-    // axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
-    // .then(response => {
-    //   this.setState({
-    //     result: response.data.photos.photo,
-    //     loading: false
-    //   });
-    //   if (query === "waterfalls") {
-    //     this.setState({
-    //       waterfalls: response.data.photos.photo,
-    //       loading: false
-    //     });
-    //   } else if (query === "flowers") {
-    //     this.setState({
-    //       flowers: response.data.photos.photo,
-    //       loading: false
-    //     });
-    //   } else if (query === "mountains") {
-    //     this.setState({
-    //       mountains: response.data.photos.photo,
-    //       loading: false
-    //     });
-    //   } else { 
-    //     this.setState({
-    //     pictures: response.data.photos.photo,
-    //     loading: false
-    //   });
-    // }
-    // })
-    // .catch(error => {
-    //   console.log('Error fetching parsing data', error);
-    // });
+    
   }
 
   render() {
